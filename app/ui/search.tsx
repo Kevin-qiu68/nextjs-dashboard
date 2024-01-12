@@ -5,22 +5,16 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import path from 'path';
 import { useDebouncedCallback } from 'use-debounce';
 
-
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  
-  
 
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
-    
-    const pathnameString = pathname.toString();
-    if(pathnameString !== '/dashboard/customers') {
-      params.set('page', '1');
-    }
-    
+
+    params.set('page', '1');
+
     if (term) {
       params.set('query', term);
     } else {
